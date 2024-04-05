@@ -8,10 +8,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Loader from '../../component/Loader';
+import {useDispatch, useSelector} from 'react-redux';
 
 const ProductList = (props = {}) => {
   const {itemList, isLoading, emptymsg = 'No Record Found', navigation} = props;
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.itemList);
+  // dispatch({ type: "ADD_TO_ARRAY", payload: obj });
 
+  const addCart = item => {
+    dispatch({type: 'ADD_TO_ARRAY', payload: item});
+    navigation.navigate('ProductDetail', {id: item.id});
+  };
   const emptyComponent = () => {
     return (
       isLoading == false && (
@@ -25,7 +33,7 @@ const ProductList = (props = {}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('ProductDetail', {id: item.id});
+          addCart(item);
         }}>
         <View style={styles.card}>
           <View>
