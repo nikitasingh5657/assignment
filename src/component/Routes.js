@@ -1,8 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProductDetail from '../screen/ProductDetail';
-import ProductList from '../screen/ProductList';
+import ProductDetail from '../screen/productDetails';
+// import ProductList from '../screen/productList';
+import useFetchProductListItems from '../screen/productList';
+import UseFetchProductDetail from '../screen/productDetails';
 
 const Stack = createNativeStackNavigator();
 const Routes = () => {
@@ -11,14 +13,14 @@ const Routes = () => {
       <Stack.Navigator initialRouteName="ProductList">
         <Stack.Screen
           name="ProductDetail"
-          component={ProductDetail}
+          component={UseFetchProductDetail}
           options={{
             headerTitle: 'Product Details',
           }}
         />
         <Stack.Screen
           name="ProductList"
-          component={ProductList}
+          component={useFetchProductListItems}
           options={{
             headerTitle: 'Products',
           }}
