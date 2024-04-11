@@ -2,37 +2,29 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Loader from '../../component/Loader';
 
-const ProductDetail = (props = {}) => {
-  const {productDetails, isLoading} = props;
+const UsersDetails = (props = {}) => {
+  const {UserDtls, isLoading} = props;
   return (
     <View>
       <Loader loadingTxt={'Loading...'} loadingState={isLoading} />
       <View style={styles.conatiner}>
         <View style={styles.imageWrapper}>
-          <Image
+          {/* <Image
             style={{width: 200, height: 200, borderRadius: 100}}
             source={{
-              uri: productDetails.thumbnail,
+              uri: UserDtls.thumbnail,
             }}
-          />
+          /> */}
         </View>
         <View style={styles.descWrapper}>
-          <Text style={styles.productTitle}>{productDetails.title}</Text>
-          <Text style={styles.productDesc}>
-            Desc :- {productDetails.description}
-          </Text>
-          <Text style={styles.productBrand}>
-            Brand :- {productDetails.brand}
-          </Text>
-          <Text style={styles.productPrice}>
-            Price :- ${productDetails.price}
-          </Text>
+          <Text style={styles.productTitle}>{UserDtls.title}</Text>
+          <Text style={styles.productDesc}>Desc :- {UserDtls.body}</Text>
         </View>
       </View>
     </View>
   );
 };
-export default ProductDetail;
+export default UsersDetails;
 const styles = StyleSheet.create({
   conatiner: {
     justifyContent: 'space-evenly',

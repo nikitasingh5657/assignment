@@ -2,29 +2,30 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator} from 'react-native';
 import Loader from '../../component/Loader';
-import ProductDetail from './productDetails';
+import ProductDetail from './userDetails';
+import UsersDetails from './userDetails';
 
-export default function UseFetchProductDetail({props, route}) {
-  const [productDetails, setProductDetails] = useState({});
+export default function UseFetchUserDetails({props, route}) {
+  const [UserDetails, setUserDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    GetProductdata();
+    getUserDetails();
   }, []);
 
-  const GetProductdata = () => {
+  const getUserDetails = () => {
     setIsLoading(true);
-    fetch(`https://dummyjson.com/products/${route.params.id}`)
+    fetch(`https://jsonplaceholder.typicode.com/posts/${route.params.id}`)
       .then(res => res.json())
       .then(result => {
         setIsLoading(false);
-        setProductDetails(result);
+        setUserDetails(result);
       });
   };
 
   return (
     <View>
-      <ProductDetail productDetails={productDetails} isLoading={isLoading} />
+      <UsersDetails UserDtls={UserDetails} isLoading={isLoading} />
     </View>
   );
 }

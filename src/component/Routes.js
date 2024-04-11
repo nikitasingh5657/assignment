@@ -1,28 +1,26 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProductDetail from '../screen/productDetails';
-// import ProductList from '../screen/productList';
-import useFetchProductListItems from '../screen/productList';
-import UseFetchProductDetail from '../screen/productDetails';
+import UseFetchUserDetails from '../screen/userDetails';
+import UseFetchUserList from '../screen/userList';
 
 const Stack = createNativeStackNavigator();
 const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ProductList">
+      <Stack.Navigator initialRouteName="UserList">
         <Stack.Screen
-          name="ProductDetail"
-          component={UseFetchProductDetail}
+          name="UserDetail"
+          component={UseFetchUserDetails}
           options={{
-            headerTitle: 'Product Details',
+            headerTitle: 'User Details',
           }}
         />
         <Stack.Screen
-          name="ProductList"
-          component={useFetchProductListItems}
+          name="UserList"
+          component={UseFetchUserList}
           options={{
-            headerTitle: 'Products',
+            headerTitle: 'List',
           }}
         />
       </Stack.Navigator>

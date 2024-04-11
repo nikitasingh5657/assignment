@@ -1,18 +1,18 @@
 import {BackHandler, Alert, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import ProductList from './ProductList';
+import React, {useEffect, useState, useCallback} from 'react';
+import UsersList from './usersList';
 
-export default function UseFetchProductListItems({navigation}) {
-  const [productItem, setProductItem] = useState({});
+export default function UseFetchUserList({navigation}) {
+  const [userList, setUserList] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
-    GetProductdata();
+    getUserList();
     BackHandler.addEventListener('hardwareBackPress', backAction);
     navigation.addListener('focus', () => {
-      GetProductdata();
+      getUserList();
     });
-  }, []);
+  }, [getUserList]);
+
   backAction = () => {
     if (!navigation.isFocused()) {
       return false;
@@ -28,23 +28,24 @@ export default function UseFetchProductListItems({navigation}) {
     return true;
   };
 
-  const GetProductdata = () => {
+  // useCallback to memoize the getuserList function itself, ensuring that it only changes when its dependencies change.
+  const getUserList = useCallback(() => {
     setIsLoading(true);
-    fetch('https://dummyjson.com/products')
+    fetch('https://jsonplaceholder.typicode.com/posts/')
       .then(res => res.json())
       .then(result => {
         setIsLoading(false);
-        if (Array.isArray(result?.products)) {
-          setProductItem(result.products);
+        if (Array.isArray(result)) {
+          setUserList(result);
         } else {
-          setProductItem([]);
+          setUserList([]);
         }
       });
-  };
+  }, []);
 
   return (
-    <ProductList
-      itemList={productItem}
+    <UsersList
+      itemList={userList}
       isLoading={isLoading}
       navigation={navigation}
     />
